@@ -82,14 +82,12 @@ function biketagExample(options) {
         }
 
         if (game.data) {
+            console.info("\x1b[44mDisplaying Game\x1b[0m", game.data)
+
             const gameTextEl = document.getElementById("game")
             gameTextEl.innerText = game.data.name
 
-            if (game.data.logo) {
-                logoEl.src = `${sanityBaseCDNUrl}${game.data.logo.replace('image-', '').replace('-png', '.png').replace('-jpg','.jpg')}`
-            } else {
-                logoEl.src = `${sanityBaseCDNUrl}dd6d8069fdfc6a4b7f9670977f0959301587534f-1200x600.png`
-            }
+            logoEl.src = getLogoImageUrl(game.data)
 
             biketagAPI = getBikeTagApi({
                 ...opts,
@@ -188,15 +186,37 @@ function biketagExample(options) {
         const allGames = await biketagAPI.getGameData()
 
         if (allGames.data && allGames.data.length) {
+              console.info("\x1b[44mGame Data Retrieved\x1b[0m", { allGames })
+
             const gameChangerEl = document.getElementById('gameChanger')
+            const gameDirectoryEl = document.getElementById('gameDirectory')
             for (let game of allGames.data) {
                 const gameSelectEl = document.createElement('option')
+                const gameIconEl = document.createElement('a')
+                const gameIconImageEl = document.createElement('img')
+                const gameIconTextEl = document.createElement('span')
+                gameIconEl.className = 'card'
+                gameIconEl.href = `https://${game.slug}.biketag.org`
+                gameIconImageEl.src = getLogoImageUrl(game)
+                gameIconTextEl.innerText = game.name
+                if (game.logo) {
+                    gameIconTextEl.classList.add('hidden')
+                }
+                gameIconEl.append(gameIconImageEl)
+                gameIconEl.append(gameIconTextEl)
+                gameDirectoryEl.append(gameIconEl)
+
                 gameSelectEl.text = game.name
                 gameSelectEl.value = game.slug
                 gameChangerEl.appendChild(gameSelectEl)
             }
         }
     }
+
+    /// Helpers
+    const getLogoImageUrl = (game = {}) => game.logo ?
+            `${sanityBaseCDNUrl}${game.logo.replace('image-', '').replace('-png', '.png').replace('-jpg','.jpg')}`
+            : `${sanityBaseCDNUrl}dd6d8069fdfc6a4b7f9670977f0959301587534f-1200x600.png`
 
     /// ... Pagination Methods ... ///
     const prevPage = () => {

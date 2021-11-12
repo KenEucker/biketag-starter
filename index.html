@@ -3,16 +3,16 @@
 
 <head>
   <meta charset="utf-8">
-  
+
   <!-- Production BikeTag Client -->
   <script src="https://cdn.jsdelivr.net/npm/biketag/biketag.js"></script>
-  
+
   <!-- Local BikeTag Client -->
   <script src="/node_modules/biketag/biketag.js"></script>
 
   <!-- Lazy Load Client -->
   <script src="https://cdn.jsdelivr.net/npm/lazyload@2.0.0-rc.2/lazyload.js"></script>
-  
+
   <!-- Styles -->
   <style>
     * {
@@ -130,6 +130,56 @@
         transform: rotate(360deg);
       }
     }
+
+    /* #gameDirectory img {
+      max-width: 10vw;
+    }
+
+    #gameDirectory>div {
+      text-align: center;
+      display: inline-grid;
+    }*/
+
+    #gameDirectory {
+      margin-top: 2em;
+    }
+
+    .card {
+      color: black;
+      padding: 1rem;
+      height: 8em;
+      text-align: center;
+      display: inline-grid;
+      font-family: monospace;
+      font-size: 16px;
+      font-weight: bold;
+      margin: auto;
+    }
+
+    .cards {
+      width: 100%;
+      margin: 0 auto;
+      display: grid;
+      grid-gap: 1rem;
+    }
+
+    .cards img {
+      max-height: 15vh;
+    }
+
+    /* Screen larger than 600px? 2 column */
+    @media (min-width: 600px) {
+      .cards { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* Screen larger than 900px? 3 columns */
+    @media (min-width: 900px) {
+      .cards { grid-template-columns: repeat(4, 1fr); }
+    }
+
+    h1 {
+      text-align: center;
+    }
   </style>
 </head>
 
@@ -140,7 +190,9 @@
 
   <!-- Header -->
   <div class="header">
-    <img id="logo" src="https://cdn.sanity.io/images/x37ikhvs/production/dd6d8069fdfc6a4b7f9670977f0959301587534f-1200x600.png" style="max-width:25vw;">
+    <img id="logo"
+      src="https://cdn.sanity.io/images/x37ikhvs/production/dd6d8069fdfc6a4b7f9670977f0959301587534f-1200x600.png"
+      style="max-width:25vw;">
     <h1>BikeTag Starter</h1>
     <p>See all of the images for the <span id="game"></span> game.</p>
     <select id="gameChanger" onChange="javascript:window.changeGame(this);">
@@ -158,25 +210,31 @@
     <div id="pageContent"></div>
   </div>
 
+  <!-- Directory -->
+  
+  <h1>BikeTag Game Directory</h1>
+  <div id="gameDirectory" class="cards">
+  </div>
+
   <!-- BikeTag Browser Code -->
   <script src="/browser.js"></script>
   <script>
     /// Configure BikeTag API Opts
     const options = {
-        imgur: {
-            clientId: "IMGUR_CLIENT_ID",
-            clientSecret: "IMGUR_CLIENT_SECRET",
-        },
-        sanity: {
-            projectId: "SANITY_PROJECT_ID",
-            dataset: "SANITY_DATASET",
-        },
-        reddit: {
-            clientId: "REDDIT_CLIENT_ID",
-            clientSecret: "REDDIT_CLIENT_SECRET",
-            username: "REDDIT_USERNAME",
-            password: "REDDIT_PASSWORD",
-        },
+      imgur: {
+        clientId: "IMGUR_CLIENT_ID",
+        clientSecret: "IMGUR_CLIENT_SECRET",
+      },
+      sanity: {
+        projectId: "SANITY_PROJECT_ID",
+        dataset: "SANITY_DATASET",
+      },
+      reddit: {
+        clientId: "REDDIT_CLIENT_ID",
+        clientSecret: "REDDIT_CLIENT_SECRET",
+        username: "REDDIT_USERNAME",
+        password: "REDDIT_PASSWORD",
+      },
     }
 
     /// Run

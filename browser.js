@@ -3,6 +3,7 @@ function biketagExample(options) {
     let current_page = 1;
     let previous_page = current_page;
     const rows_per_page = 3;
+    const sanityBaseCDNUrl = `https://cdn.sanity.io/images/${options.sanity?.projectId ?? 'x37ikhvs'}/${options.sanity?.dataset ?? 'production'}/`
 
     /// Setup
     const getBikeTagApi = (opts, reinitialize = false) => {
@@ -36,6 +37,7 @@ function biketagExample(options) {
         let biketagAPI = getBikeTagApi(opts, true)
         const game = await biketagAPI.getGameData(opts.game)
         const pagesEl = document.getElementById('pageContent')
+        const logoEl = document.getElementById('logo')
 
         pagesEl.innerHTML = ""
         num_pages = 0
@@ -82,6 +84,12 @@ function biketagExample(options) {
         if (game.data) {
             const gameTextEl = document.getElementById("game")
             gameTextEl.innerText = game.data.name
+
+            if (game.data.logo) {
+                logoEl.src = `${sanityBaseCDNUrl}${game.data.logo.replace('image-', '').replace('-png', '.png').replace('-jpg','.jpg')}`
+            } else {
+                logoEl.src = `${sanityBaseCDNUrl}dd6d8069fdfc6a4b7f9670977f0959301587534f-1200x600.png`
+            }
 
             biketagAPI = getBikeTagApi({
                 ...opts,

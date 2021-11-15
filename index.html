@@ -8,7 +8,7 @@
   <script src="https://cdn.jsdelivr.net/npm/biketag/biketag.js"></script>
 
   <!-- Local BikeTag Client -->
-  <script src="/node_modules/biketag/biketag.js"></script>
+  <!-- <script src="/node_modules/biketag/biketag.js"></script> -->
 
   <!-- Lazy Load Client -->
   <script src="https://cdn.jsdelivr.net/npm/lazyload@2.0.0-rc.2/lazyload.js"></script>
@@ -180,6 +180,19 @@
     h1 {
       text-align: center;
     }
+
+    .hidden {
+      visibility: hidden;
+      display: none;
+    }
+
+    #logo {
+      max-height: 40vh;
+    }
+
+    #currentImage img {
+      max-height: 25vh;
+    }
   </style>
 </head>
 
@@ -194,6 +207,10 @@
       src="https://cdn.sanity.io/images/x37ikhvs/production/dd6d8069fdfc6a4b7f9670977f0959301587534f-1200x600.png"
       style="max-width:25vw;">
     <h1>BikeTag Starter</h1>
+    <div id="currentImage" class="hidden">
+      <h3>Current Mystery Location</h3>
+      <img>
+    </div>
     <p>See all of the images for the <span id="game"></span> game.</p>
     <select id="gameChanger" onChange="javascript:window.changeGame(this);">
       <option></option>
@@ -204,8 +221,8 @@
   <div id="pages" style="text-align: center">
     <div>
       <a href="javascript:window.prevPage()" id="btn_prev">Prev</a>
+      <span id="page"></span>
       <a href="javascript:window.nextPage()" id="btn_next">Next</a>
-      page: <span id="page"></span>
     </div>
     <div id="pageContent"></div>
   </div>

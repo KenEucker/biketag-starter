@@ -1,4 +1,4 @@
-function biketagExample(options) {
+function biketagExample(options = {}) {
     let num_pages = 0;
     let current_page = 1;
     let previous_page = current_page;
@@ -38,10 +38,12 @@ function biketagExample(options) {
         const game = await biketagAPI.getGameData(opts.game)
         const pagesEl = document.getElementById('pageContent')
         const logoEl = document.getElementById('logo')
+        const currentImageEl = document.getElementById('currentImage')
 
         pagesEl.innerHTML = ""
         num_pages = 0
         current_page = previous_page = 1
+        currentImageEl.classList.add('hidden')
 
         const createImage = (url) => {
             const imgEl = document.createElement('img')
@@ -87,6 +89,8 @@ function biketagExample(options) {
             const gameTextEl = document.getElementById("game")
             gameTextEl.innerText = game.data.name
 
+            currentImageEl.querySelector('img').src = `https://${game.data.slug}.biketag.org/current`
+            currentImageEl.classList.remove('hidden')
             logoEl.src = getLogoImageUrl(game.data)
 
             biketagAPI = getBikeTagApi({
@@ -210,6 +214,20 @@ function biketagExample(options) {
                 gameSelectEl.value = game.slug
                 gameChangerEl.appendChild(gameSelectEl)
             }
+        } else {
+            console.info("\033[41mGame Data Could Not Be Retrieved\x1b[0m", allGames)
+            if (!/0.0.0.0/.test(window.location.host)) {
+                const portNumberIndex = window.location.host.indexOf(':')
+                const zeeroZeroZeroZeroUrl = `http://0.0.0.0${portNumberIndex !== -1 ? window.location.host.substring(portNumberIndex) : ''}`
+                const retyMessate = `Request is not being made from <a href="${zeeroZeroZeroZeroUrl}">${zeeroZeroZeroZeroUrl}</a>.<br>If you are running this on your local machine, (localhost), try 0.0.0.0 instead.`
+                const currentImageEl = document.getElementById('currentImage')
+                const currentImageHeadingEl = currentImageEl.querySelector('h3')
+
+                currentImageHeadingEl.innerHTML = retyMessate
+                currentImageEl.classList.remove('hidden')
+    
+                console.log(retyMessate)
+            }
         }
     }
 
@@ -271,6 +289,7 @@ function biketagExample(options) {
         if (page == numPages()) {
             btn_next.style.visibility = "hidden";
         } else {
+            btn_prev.style.visibility = "visible";
             btn_next.style.visibility = "visible";
         }
     }

@@ -11,7 +11,7 @@ function biketagExample(options = {}) {
             window.biketagApi = new biketag(opts)
         } else {
             console.log('setting new BikeTag config', {
-                config: window.biketagApi.setConfiguration(opts, false, reinitialize)
+                config: window.biketagApi.config(opts, false, reinitialize)
             })
         }
 
@@ -102,7 +102,7 @@ function biketagExample(options = {}) {
                     subreddit: game.data.subreddit,
                 },
             }, true)
-            const config = biketagAPI.getConfiguration()
+            const config = biketagAPI.config()
 
             const albumTagsData = await biketagAPI.getTags(undefined, config.imgur.hash ? {
                 source: 'imgur'

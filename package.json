@@ -1,6 +1,6 @@
 {
   "name": "biketag-starter",
-  "version": "1.8.2",
+  "version": "1.9.1",
   "description": "Starter examples for applications that use the biketag-api",
   "main": "index.js",
   "scripts": {
@@ -11,7 +11,7 @@
   "author": "Ken Eucker",
   "license": "AGPLv3",
   "dependencies": {
-    "biketag": "^1.8.3",
+    "biketag": "^1.9.1",
     "dotenv": "^10.0.0"
   },
   "devDependencies": {

@@ -11,7 +11,7 @@
   "author": "Ken Eucker",
   "license": "AGPLv3",
   "dependencies": {
-    "biketag": "^1.9.1",
+    "biketag": "^1.11.1",
     "dotenv": "^10.0.0"
   },
   "devDependencies": {

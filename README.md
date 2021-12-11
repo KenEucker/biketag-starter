@@ -14,7 +14,7 @@ Starter examples for applications that use the [biketag-api][biketag-api]
 4. Run the browser sample
 `npm run start`
 
-    4a. Visit the site @ http://0.0.0.0:8080
+    4a. Visit the site @ http://localhost:8080
 
 ## How To Obtain Credentials
 [_For Full documentation for using the BikeTag API, see the BikeTag Documenation_][biketag-api]

@@ -5,7 +5,7 @@ import { createReadStream, existsSync, readFileSync } from 'fs'
 
 dotenv.config()
 const port = process.env.PORT ?? 8080
-const host = process.env.HOST ?? 'http://0.0.0.0'
+const host = process.env.HOST ?? 'http://localhost'
 
 const replaceEnvironmentVars = (text = "") => {
     return text
